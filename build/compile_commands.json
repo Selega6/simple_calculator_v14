@@ -1,0 +1,20 @@
+[
+{
+  "directory": "D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -o CMakeFiles\\testing_mat_lib.dir\\testing_mat_lib.cpp.obj -c D:\\ULPGC\\master\\PP_cplusplus\\simple_calculator_v13\\testing_mat_lib.cpp",
+  "file": "D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/testing_mat_lib.cpp",
+  "output": "CMakeFiles/testing_mat_lib.dir/testing_mat_lib.cpp.obj"
+},
+{
+  "directory": "D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -o CMakeFiles\\testing_generic_value.dir\\testing_generic_value.cpp.obj -c D:\\ULPGC\\master\\PP_cplusplus\\simple_calculator_v13\\testing_generic_value.cpp",
+  "file": "D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/testing_generic_value.cpp",
+  "output": "CMakeFiles/testing_generic_value.dir/testing_generic_value.cpp.obj"
+},
+{
+  "directory": "D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -o CMakeFiles\\simple_calculator_v14.dir\\simple_calculator_v14.cpp.obj -c D:\\ULPGC\\master\\PP_cplusplus\\simple_calculator_v13\\simple_calculator_v14.cpp",
+  "file": "D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/simple_calculator_v14.cpp",
+  "output": "CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj"
+}
+]

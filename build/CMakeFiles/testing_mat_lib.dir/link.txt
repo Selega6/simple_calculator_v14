@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\testing_mat_lib.dir/objects.a
+C:\MinGW\bin\ar.exe qc CMakeFiles\testing_mat_lib.dir/objects.a @CMakeFiles\testing_mat_lib.dir\objects1.rsp
+C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\testing_mat_lib.dir/objects.a -Wl,--no-whole-archive -o testing_mat_lib.exe -Wl,--out-implib,libtesting_mat_lib.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\testing_mat_lib.dir\linkLibs.rsp
