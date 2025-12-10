@@ -378,6 +378,8 @@ int precision=default_precision;
 gv expression();
 
 std::map<std::string, GenericFunction> generic_functions;
+std::map<std::string, std::string> generic_function_signatures;
+
 
 static std::string replace_parameters(
     const GenericFunction& f,
@@ -695,27 +697,34 @@ gv statement()
 {
     Token t = ts.get();
 
-    // possible generic function definition
+    //
+    // ------------------------------------------------------
+    // DETECCIÓN DE DEFINICIÓN DE FUNCIÓN: f(x,y)=x+y;
+    // ------------------------------------------------------
+    //
     if(t.kind == Token::name_token)
     {
         string fname = t.name;
         Token t2 = ts.get();
 
+        // Si aparece un '(' tras un nombre → posible definición de función
         if(t2.is_symbol('('))
         {
             vector<string> params;
 
+            // Leer parámetros dentro de los paréntesis
             Token p = ts.get();
             if(p.kind == Token::name_token)
             {
                 params.push_back(p.name);
-                Token sep = ts.get();
 
+                Token sep = ts.get();
                 while(sep.is_symbol(','))
                 {
                     Token pn = ts.get();
                     if(pn.kind != Token::name_token)
                         error("parameter expected");
+
                     params.push_back(pn.name);
                     sep = ts.get();
                 }
@@ -725,27 +734,38 @@ gv statement()
             }
             else if(!p.is_symbol(')'))
             {
-                ts.unget(p); ts.unget(t2); ts.unget(t);
+                // No era definición → revertir tokens
+                ts.unget(p);
+                ts.unget(t2);
+                ts.unget(t);
                 goto normal_statement;
             }
 
+            // Debe venir '='
             Token eq = ts.get();
             if(!eq.is_symbol('='))
             {
-                ts.unget(eq); ts.unget(t2); ts.unget(t);
+                ts.unget(eq);
+                ts.unget(t2);
+                ts.unget(t);
                 goto normal_statement;
             }
 
-            // read function body until ';'
+            //
+            // ------------------------------------
+            // LEER EL CUERPO DE LA FUNCIÓN: x+y;
+            // ------------------------------------
+            //
             ostringstream body;
             while(true)
             {
                 Token tk = ts.get();
-                if(tk.kind == Token::print) break;
+                if(tk.kind == Token::print) break;   // encontró ';'
 
                 if(tk.kind == Token::number)
                 {
-                    ostringstream ss; tk.value.to_stream(ss);
+                    ostringstream ss;
+                    tk.value.to_stream(ss);
                     body << ss.str();
                 }
                 else if(tk.kind == Token::name_token)
@@ -756,10 +776,39 @@ gv statement()
                     error("bad token in function body");
             }
 
+            //
+            // Registrar función internamente para ejecución
+            //
             generic_functions[fname] =
                 GenericFunction(fname, params, body.str());
 
-            cout << "Function " << fname << " defined.\n";
+            //
+            // Construir firma textual f(x,y)
+            //
+            std::string signature = fname + "(";
+            for(size_t i = 0; i < params.size(); ++i)
+            {
+                signature += params[i];
+                if(i + 1 < params.size()) signature += ",";
+            }
+            signature += ")";
+
+            //
+            // Guardarla en el diccionario textual (opcional)
+            //
+            generic_function_signatures[signature] = body.str();
+
+            cout << "Function " << signature << " defined.\n";
+
+            //
+            // ----------------------------------------------------
+            //  SOLUCIÓN DEL BUG: limpiar token stream y cin
+            // ----------------------------------------------------
+            //
+            ts.ignore();   // limpia el buffer interno del Token_stream
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
             return gv(0.0);
         }
         else
@@ -768,19 +817,28 @@ gv statement()
         }
     }
 
+    //
+    // ------------------------------------
+    //  LÓGICA NORMAL (const, asignación…)
+    // ------------------------------------
+    //
 normal_statement:
 
-    if(t.kind == Token::const_token) return constant_assign();
+    if(t.kind == Token::const_token)
+        return constant_assign();
 
     if(t.kind == Token::name_token)
     {
         Token t2 = ts.get();
         if(t2.is_symbol('='))
         {
-            ts.unget(t); ts.unget(t2);
+            ts.unget(t);
+            ts.unget(t2);
             return assign();
         }
-        ts.unget(t); ts.unget(t2);
+
+        ts.unget(t);
+        ts.unget(t2);
         return expression();
     }
 

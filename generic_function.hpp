@@ -32,7 +32,7 @@
     /*
     * Mapa global donde guardaremos las funciones definidas por usuario.
     */
-    //extern std::map<std::string, GenericFunction> generic_functions;
+    extern std::map<std::string, GenericFunction> generic_functions;
 
     /*
     * Evalúa la función f(x,y) sustituyendo parámetros por valores,
@@ -41,9 +41,9 @@
     gv call_generic_function(const GenericFunction& f,
                         const std::vector<gv>& args);
 
-    /*
-    * Para depurar:
     
-    std::string replace_parameters(const GenericFunction& f,
-                                const std::vector<gv>& args);*/
-#endif // USER_FUNCTION_HPP
+    //Para depurar:
+    
+    //std::string replace_parameters(const GenericFunction& f,
+    //                            const std::vector<gv>& args);
+#endif
