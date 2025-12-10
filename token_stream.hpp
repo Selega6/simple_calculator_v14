@@ -1,7 +1,7 @@
 #ifndef TOKEN_STREAM_HPP
 #define TOKEN_STREAM_HPP
 
-#include <queue>
+#include <vector> // <-- CAMBIO CLAVE: Vector para LIFO
 #include <string>
 #include "generic_value.hpp"
 
@@ -22,13 +22,12 @@ struct Token {
 
     Token();
     Token(id);
-    Token(id tk, const std::string& str); // <-- NUEVA DECLARACIÓN AÑADIDA
+    Token(id tk, const std::string& str); 
     Token(char);
     Token(const gv&);
     Token(const std::string&);
     Token(const std::string&, double(*func)(double));
 
-    // Métodos implementados como inline para evitar la redefinición en el .cpp
     bool is_symbol(char c) { return ((kind==id::char_token) && (symbol==c)); }
     bool is_function() { return (kind==id::function_token); }
 };
@@ -41,10 +40,9 @@ public:
     void ignore();
 
 private:
-    std::queue<Token> buffer;
+    std::vector<Token> buffer; // <-- Implementación LIFO
 };
 
-// función auxiliar
 bool is_valid_filename(const std::string& s);
 
 #endif

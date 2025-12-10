@@ -64,13 +64,15 @@ bool is_valid_filename(const string& s)
 // Implementación del constructor por defecto de Token_stream
 Token_stream::Token_stream() { } 
 
+
 // ---------------- Implementación de get() ----------------
 
 Token Token_stream::get()
 {
     if (!buffer.empty()) {
-        Token t = buffer.front();
-        buffer.pop();
+        // LIFO: Leer el último elemento
+        Token t = buffer.back();
+        buffer.pop_back();
         return t;
     }
 
@@ -78,8 +80,9 @@ Token Token_stream::get()
 
     do { 
         if (!cin.get(ch)) {
-            // Manejar EOF o error de lectura
-            throw runtime_error("End of file or input stream error");
+            // CORRECCIÓN CLAVE: Devolver Token::id::none en EOF en lugar de lanzar excepción.
+            // Esto permite que el parser recursivo finalice limpiamente.
+            return Token(Token::id::none); 
         }
     } while (isspace(ch));
 
@@ -115,7 +118,7 @@ Token Token_stream::get()
                     s += ch;
                 cin.unget();
 
-                // palabras clave
+                // palabras clave (se mantiene la lógica de keywords y funciones)
                 if (s == "quit") return Token(Token::id::quit);
                 if (s == "const") return Token(Token::id::const_token);
                 if (s == "help") return Token(Token::id::help_token);
@@ -127,7 +130,7 @@ Token Token_stream::get()
                 if (s == "load") return Token(Token::id::load);
                 if (s == "env") return Token(Token::id::env);
 
-                // funciones (se usa :: para evitar ambigüedad con std::)
+                // funciones
                 if (s == "sin") return Token(s, ::sin);
                 if (s == "cos") return Token(s, ::cos);
                 if (s == "tan") return Token(s, ::tan);
@@ -141,7 +144,6 @@ Token Token_stream::get()
                 if (s == "log10") return Token(s, ::log10);
                 if (s == "log2") return Token(s, ::log2);
 
-                // A esta línea apuntaba el segundo error de compilación
                 if (is_valid_filename(s))
                     return Token(Token::id::filename, s);
 
@@ -158,8 +160,8 @@ Token Token_stream::get()
 void Token_stream::ignore()
 {
     while (!buffer.empty()) {
-        Token t = buffer.front();
-        buffer.pop();
+        Token t = buffer.back(); // LIFO
+        buffer.pop_back();       // LIFO
         if (t.kind == Token::id::quit) return;
     }
 
@@ -171,5 +173,6 @@ void Token_stream::ignore()
 // Implementación de la función unget
 void Token_stream::unget(Token t)
 { 
-    buffer.push(t); 
+    // LIFO: Añadir al final del vector
+    buffer.push_back(t); 
 }
