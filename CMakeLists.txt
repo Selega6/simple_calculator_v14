@@ -1,18 +1,39 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(mat_lib CXX)
+project(simple_calculator CXX)
 
-#message(STATUS "libraries:")
-#
-#message(STATUS "  'mat_lib' will be generated")
-## mat_lib library 
-#add_library(
-#  mat_lib
-#  matrix.cpp 
-#)
+# -----------------------------------------------------------------------------
+# 1. Definición de los archivos fuente para la aplicación principal (Modular)
+#    - Excluimos simple_calculator_v14.cpp porque su contenido está repartido 
+#      en los demás archivos modulares (main, calculate, parser, etc.)
+# -----------------------------------------------------------------------------
+set(CALCULATOR_SOURCES
+  main.cpp
+  calculate.cpp
+  parser.cpp
+  environment.cpp
+  token_stream.cpp
+)
 
 message(STATUS "targets:")
-# testing_mat_lib 
+
+# -----------------------------------------------------------------------------
+# 2. Programa principal: simple_calculator_v14
+#    Se construye a partir de *todos* los archivos fuente modulares.
+# -----------------------------------------------------------------------------
+message(STATUS "  'simple_calculator_v14' will be generated (modular version)")
+add_executable(
+  simple_calculator_v14 
+  ${CALCULATOR_SOURCES}
+)
+
+# Se enlaza la biblioteca matemática 'm' (necesaria para funciones como sin, cos, pow)
+target_link_libraries(simple_calculator_v14 m)
+
+
+# -----------------------------------------------------------------------------
+# 3. Targets de Testing (se mantienen como estaban)
+# -----------------------------------------------------------------------------
 message(STATUS "  'testing_mat_lib' will be generated")
 add_executable(
   testing_mat_lib 
@@ -26,37 +47,7 @@ add_executable(
   testing_generic_value.cpp
 )
 
-message(STATUS "  'simple_calculator_v14' will be generated")
-add_executable(
-  simple_calculator_v14 
-  simple_calculator_v14.cpp
-)
-
-# message(STATUS "  'parser' will be generated")
-# add_executable(
-#   parser 
-#   parser.cpp
-# )
-
-# message(STATUS "  'token_stream' will be generated")
-# add_executable(
-#   token_stream 
-#   token_stream.cpp
-# )
-
-# message(STATUS "  'environment' will be generated")
-# add_executable(
-#   environment 
-#   environment.cpp
-# )
-
-# message(STATUS "  'calculate' will be generated")
-# add_executable(
-#   calculate 
-#   calculate.cpp
-# )
-# message(STATUS "  'main' will be generated")
-# add_executable(
-#   main 
-#   main.cpp
-# )
+# Las dependencias de testing_mat_lib y testing_generic_value deberían 
+# incluir los archivos de cabecera de la calculadora si los usan.
+# Por ahora, se dejan como están en el original, asumiendo que sus
+# dependencias están resueltas o son implícitas.

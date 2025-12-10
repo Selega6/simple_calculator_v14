@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v13
+CMAKE_SOURCE_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v14
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build
+CMAKE_BINARY_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/simple_calculator_v14.dir/depend.make
@@ -68,33 +68,97 @@ include CMakeFiles/simple_calculator_v14.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/simple_calculator_v14.dir/flags.make
 
-CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj: CMakeFiles/simple_calculator_v14.dir/flags.make
-CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v13/simple_calculator_v14.cpp
-CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj: CMakeFiles/simple_calculator_v14.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj -MF CMakeFiles\simple_calculator_v14.dir\simple_calculator_v14.cpp.obj.d -o CMakeFiles\simple_calculator_v14.dir\simple_calculator_v14.cpp.obj -c D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\simple_calculator_v14.cpp
+CMakeFiles/simple_calculator_v14.dir/main.cpp.obj: CMakeFiles/simple_calculator_v14.dir/flags.make
+CMakeFiles/simple_calculator_v14.dir/main.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/main.cpp
+CMakeFiles/simple_calculator_v14.dir/main.cpp.obj: CMakeFiles/simple_calculator_v14.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/simple_calculator_v14.dir/main.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_calculator_v14.dir/main.cpp.obj -MF CMakeFiles\simple_calculator_v14.dir\main.cpp.obj.d -o CMakeFiles\simple_calculator_v14.dir\main.cpp.obj -c D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\main.cpp
 
-CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\simple_calculator_v14.cpp > CMakeFiles\simple_calculator_v14.dir\simple_calculator_v14.cpp.i
+CMakeFiles/simple_calculator_v14.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/simple_calculator_v14.dir/main.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\main.cpp > CMakeFiles\simple_calculator_v14.dir\main.cpp.i
 
-CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\simple_calculator_v14.cpp -o CMakeFiles\simple_calculator_v14.dir\simple_calculator_v14.cpp.s
+CMakeFiles/simple_calculator_v14.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/simple_calculator_v14.dir/main.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\main.cpp -o CMakeFiles\simple_calculator_v14.dir\main.cpp.s
+
+CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj: CMakeFiles/simple_calculator_v14.dir/flags.make
+CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/calculate.cpp
+CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj: CMakeFiles/simple_calculator_v14.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj -MF CMakeFiles\simple_calculator_v14.dir\calculate.cpp.obj.d -o CMakeFiles\simple_calculator_v14.dir\calculate.cpp.obj -c D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\calculate.cpp
+
+CMakeFiles/simple_calculator_v14.dir/calculate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/simple_calculator_v14.dir/calculate.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\calculate.cpp > CMakeFiles\simple_calculator_v14.dir\calculate.cpp.i
+
+CMakeFiles/simple_calculator_v14.dir/calculate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/simple_calculator_v14.dir/calculate.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\calculate.cpp -o CMakeFiles\simple_calculator_v14.dir\calculate.cpp.s
+
+CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj: CMakeFiles/simple_calculator_v14.dir/flags.make
+CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/parser.cpp
+CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj: CMakeFiles/simple_calculator_v14.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj -MF CMakeFiles\simple_calculator_v14.dir\parser.cpp.obj.d -o CMakeFiles\simple_calculator_v14.dir\parser.cpp.obj -c D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\parser.cpp
+
+CMakeFiles/simple_calculator_v14.dir/parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/simple_calculator_v14.dir/parser.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\parser.cpp > CMakeFiles\simple_calculator_v14.dir\parser.cpp.i
+
+CMakeFiles/simple_calculator_v14.dir/parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/simple_calculator_v14.dir/parser.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\parser.cpp -o CMakeFiles\simple_calculator_v14.dir\parser.cpp.s
+
+CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj: CMakeFiles/simple_calculator_v14.dir/flags.make
+CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/environment.cpp
+CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj: CMakeFiles/simple_calculator_v14.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj -MF CMakeFiles\simple_calculator_v14.dir\environment.cpp.obj.d -o CMakeFiles\simple_calculator_v14.dir\environment.cpp.obj -c D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\environment.cpp
+
+CMakeFiles/simple_calculator_v14.dir/environment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/simple_calculator_v14.dir/environment.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\environment.cpp > CMakeFiles\simple_calculator_v14.dir\environment.cpp.i
+
+CMakeFiles/simple_calculator_v14.dir/environment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/simple_calculator_v14.dir/environment.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\environment.cpp -o CMakeFiles\simple_calculator_v14.dir\environment.cpp.s
+
+CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: CMakeFiles/simple_calculator_v14.dir/flags.make
+CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/token_stream.cpp
+CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: CMakeFiles/simple_calculator_v14.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj -MF CMakeFiles\simple_calculator_v14.dir\token_stream.cpp.obj.d -o CMakeFiles\simple_calculator_v14.dir\token_stream.cpp.obj -c D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\token_stream.cpp
+
+CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\token_stream.cpp > CMakeFiles\simple_calculator_v14.dir\token_stream.cpp.i
+
+CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\token_stream.cpp -o CMakeFiles\simple_calculator_v14.dir\token_stream.cpp.s
 
 # Object files for target simple_calculator_v14
 simple_calculator_v14_OBJECTS = \
-"CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj"
+"CMakeFiles/simple_calculator_v14.dir/main.cpp.obj" \
+"CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj" \
+"CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj" \
+"CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj" \
+"CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj"
 
 # External object files for target simple_calculator_v14
 simple_calculator_v14_EXTERNAL_OBJECTS =
 
-simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj
+simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/main.cpp.obj
+simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj
+simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj
+simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj
+simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj
 simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/build.make
 simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/linkLibs.rsp
 simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/objects1.rsp
 simple_calculator_v14.exe: CMakeFiles/simple_calculator_v14.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable simple_calculator_v14.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable simple_calculator_v14.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\simple_calculator_v14.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -106,6 +170,6 @@ CMakeFiles/simple_calculator_v14.dir/clean:
 .PHONY : CMakeFiles/simple_calculator_v14.dir/clean
 
 CMakeFiles/simple_calculator_v14.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\ULPGC\master\PP_cplusplus\simple_calculator_v13 D:\ULPGC\master\PP_cplusplus\simple_calculator_v13 D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles\simple_calculator_v14.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\ULPGC\master\PP_cplusplus\simple_calculator_v14 D:\ULPGC\master\PP_cplusplus\simple_calculator_v14 D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles\simple_calculator_v14.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/simple_calculator_v14.dir/depend
 

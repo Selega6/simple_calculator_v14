@@ -22,13 +22,15 @@ struct Token {
 
     Token();
     Token(id);
+    Token(id tk, const std::string& str); // <-- NUEVA DECLARACIÓN AÑADIDA
     Token(char);
     Token(const gv&);
     Token(const std::string&);
     Token(const std::string&, double(*func)(double));
 
-    bool is_symbol(char c);
-    bool is_function();
+    // Métodos implementados como inline para evitar la redefinición en el .cpp
+    bool is_symbol(char c) { return ((kind==id::char_token) && (symbol==c)); }
+    bool is_function() { return (kind==id::function_token); }
 };
 
 class Token_stream {

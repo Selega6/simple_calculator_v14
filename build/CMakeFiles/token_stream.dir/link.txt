@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\token_stream.dir/objects.a
-C:\MinGW\bin\ar.exe qc CMakeFiles\token_stream.dir/objects.a @CMakeFiles\token_stream.dir\objects1.rsp
-C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\token_stream.dir/objects.a -Wl,--no-whole-archive -o token_stream.exe -Wl,--out-implib,libtoken_stream.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\token_stream.dir\linkLibs.rsp

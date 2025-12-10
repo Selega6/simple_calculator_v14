@@ -2,6 +2,7 @@
 #include "parser.hpp"
 #include "token_stream.hpp"
 #include "environment.hpp"
+#include "generic_function.hpp" // Asegúrate de que este include está aquí.
 
 #include <iostream>
 #include <iomanip>
@@ -9,9 +10,16 @@
 
 using namespace std;
 
-// Variables globales declaradas en main.cpp
+// DECLARACIÓN DE VARIABLES GLOBALES EXTERNAS (las que estaban en main.cpp)
 extern Token_stream ts;
 extern int precision;
+
+// AÑADIR LA DEFINICIÓN DE LOS MAPAS GLOBALES DE FUNCIONES GENÉRICAS
+// Si generic_function.hpp usa la estructura GenericFunction, 
+// debemos definir los mapas aquí.
+std::map<std::string, GenericFunction> generic_functions;
+std::map<std::string, std::string> generic_function_signatures;
+
 
 // ---------------------------------------------------------
 //  CLEAN-UP AFTER ERRORS

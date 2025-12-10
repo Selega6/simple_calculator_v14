@@ -53,18 +53,18 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v13
+CMAKE_SOURCE_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v14
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build
+CMAKE_BINARY_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/simple_calculator_v14.dir/all
 all: CMakeFiles/testing_mat_lib.dir/all
 all: CMakeFiles/testing_generic_value.dir/all
-all: CMakeFiles/simple_calculator_v14.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,10 +72,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/simple_calculator_v14.dir/clean
 clean: CMakeFiles/testing_mat_lib.dir/clean
 clean: CMakeFiles/testing_generic_value.dir/clean
-clean: CMakeFiles/simple_calculator_v14.dir/clean
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/simple_calculator_v14.dir
+
+# All Build rule for target.
+CMakeFiles/simple_calculator_v14.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target simple_calculator_v14"
+.PHONY : CMakeFiles/simple_calculator_v14.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/simple_calculator_v14.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/simple_calculator_v14.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 0
+.PHONY : CMakeFiles/simple_calculator_v14.dir/rule
+
+# Convenience name for target.
+simple_calculator_v14: CMakeFiles/simple_calculator_v14.dir/rule
+.PHONY : simple_calculator_v14
+
+# clean rule for target.
+CMakeFiles/simple_calculator_v14.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/clean
+.PHONY : CMakeFiles/simple_calculator_v14.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/testing_mat_lib.dir
@@ -84,14 +110,14 @@ clean: CMakeFiles/simple_calculator_v14.dir/clean
 CMakeFiles/testing_mat_lib.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_mat_lib.dir\build.make CMakeFiles/testing_mat_lib.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_mat_lib.dir\build.make CMakeFiles/testing_mat_lib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles --progress-num=5,6 "Built target testing_mat_lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=9,10 "Built target testing_mat_lib"
 .PHONY : CMakeFiles/testing_mat_lib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/testing_mat_lib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/testing_mat_lib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 0
 .PHONY : CMakeFiles/testing_mat_lib.dir/rule
 
 # Convenience name for target.
@@ -110,14 +136,14 @@ CMakeFiles/testing_mat_lib.dir/clean:
 CMakeFiles/testing_generic_value.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_generic_value.dir\build.make CMakeFiles/testing_generic_value.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_generic_value.dir\build.make CMakeFiles/testing_generic_value.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles --progress-num=3,4 "Built target testing_generic_value"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles --progress-num=7,8 "Built target testing_generic_value"
 .PHONY : CMakeFiles/testing_generic_value.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/testing_generic_value.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/testing_generic_value.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 0
 .PHONY : CMakeFiles/testing_generic_value.dir/rule
 
 # Convenience name for target.
@@ -128,32 +154,6 @@ testing_generic_value: CMakeFiles/testing_generic_value.dir/rule
 CMakeFiles/testing_generic_value.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_generic_value.dir\build.make CMakeFiles/testing_generic_value.dir/clean
 .PHONY : CMakeFiles/testing_generic_value.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/simple_calculator_v14.dir
-
-# All Build rule for target.
-CMakeFiles/simple_calculator_v14.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles --progress-num=1,2 "Built target simple_calculator_v14"
-.PHONY : CMakeFiles/simple_calculator_v14.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/simple_calculator_v14.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/simple_calculator_v14.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 0
-.PHONY : CMakeFiles/simple_calculator_v14.dir/rule
-
-# Convenience name for target.
-simple_calculator_v14: CMakeFiles/simple_calculator_v14.dir/rule
-.PHONY : simple_calculator_v14
-
-# clean rule for target.
-CMakeFiles/simple_calculator_v14.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/clean
-.PHONY : CMakeFiles/simple_calculator_v14.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v13
+CMAKE_SOURCE_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v14
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build
+CMAKE_BINARY_DIR = D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v13\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\ULPGC\master\PP_cplusplus\simple_calculator_v14\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -116,6 +116,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named simple_calculator_v14
+
+# Build rule for target.
+simple_calculator_v14: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 simple_calculator_v14
+.PHONY : simple_calculator_v14
+
+# fast build rule for target.
+simple_calculator_v14/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/build
+.PHONY : simple_calculator_v14/fast
+
+#=============================================================================
 # Target rules for targets named testing_mat_lib
 
 # Build rule for target.
@@ -141,42 +154,101 @@ testing_generic_value/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_generic_value.dir\build.make CMakeFiles/testing_generic_value.dir/build
 .PHONY : testing_generic_value/fast
 
-#=============================================================================
-# Target rules for targets named simple_calculator_v14
-
-# Build rule for target.
-simple_calculator_v14: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 simple_calculator_v14
-.PHONY : simple_calculator_v14
-
-# fast build rule for target.
-simple_calculator_v14/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/build
-.PHONY : simple_calculator_v14/fast
-
-simple_calculator_v14.obj: simple_calculator_v14.cpp.obj
-.PHONY : simple_calculator_v14.obj
+calculate.obj: calculate.cpp.obj
+.PHONY : calculate.obj
 
 # target to build an object file
-simple_calculator_v14.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.obj
-.PHONY : simple_calculator_v14.cpp.obj
+calculate.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj
+.PHONY : calculate.cpp.obj
 
-simple_calculator_v14.i: simple_calculator_v14.cpp.i
-.PHONY : simple_calculator_v14.i
+calculate.i: calculate.cpp.i
+.PHONY : calculate.i
 
 # target to preprocess a source file
-simple_calculator_v14.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.i
-.PHONY : simple_calculator_v14.cpp.i
+calculate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/calculate.cpp.i
+.PHONY : calculate.cpp.i
 
-simple_calculator_v14.s: simple_calculator_v14.cpp.s
-.PHONY : simple_calculator_v14.s
+calculate.s: calculate.cpp.s
+.PHONY : calculate.s
 
 # target to generate assembly for a file
-simple_calculator_v14.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/simple_calculator_v14.cpp.s
-.PHONY : simple_calculator_v14.cpp.s
+calculate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/calculate.cpp.s
+.PHONY : calculate.cpp.s
+
+environment.obj: environment.cpp.obj
+.PHONY : environment.obj
+
+# target to build an object file
+environment.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj
+.PHONY : environment.cpp.obj
+
+environment.i: environment.cpp.i
+.PHONY : environment.i
+
+# target to preprocess a source file
+environment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/environment.cpp.i
+.PHONY : environment.cpp.i
+
+environment.s: environment.cpp.s
+.PHONY : environment.s
+
+# target to generate assembly for a file
+environment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/environment.cpp.s
+.PHONY : environment.cpp.s
+
+main.obj: main.cpp.obj
+.PHONY : main.obj
+
+# target to build an object file
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/main.cpp.obj
+.PHONY : main.cpp.obj
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+parser.obj: parser.cpp.obj
+.PHONY : parser.obj
+
+# target to build an object file
+parser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/parser.cpp.obj
+.PHONY : parser.cpp.obj
+
+parser.i: parser.cpp.i
+.PHONY : parser.i
+
+# target to preprocess a source file
+parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/parser.cpp.i
+.PHONY : parser.cpp.i
+
+parser.s: parser.cpp.s
+.PHONY : parser.s
+
+# target to generate assembly for a file
+parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/parser.cpp.s
+.PHONY : parser.cpp.s
 
 testing_generic_value.obj: testing_generic_value.cpp.obj
 .PHONY : testing_generic_value.obj
@@ -226,6 +298,30 @@ testing_mat_lib.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\testing_mat_lib.dir\build.make CMakeFiles/testing_mat_lib.dir/testing_mat_lib.cpp.s
 .PHONY : testing_mat_lib.cpp.s
 
+token_stream.obj: token_stream.cpp.obj
+.PHONY : token_stream.obj
+
+# target to build an object file
+token_stream.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj
+.PHONY : token_stream.cpp.obj
+
+token_stream.i: token_stream.cpp.i
+.PHONY : token_stream.i
+
+# target to preprocess a source file
+token_stream.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.i
+.PHONY : token_stream.cpp.i
+
+token_stream.s: token_stream.cpp.s
+.PHONY : token_stream.s
+
+# target to generate assembly for a file
+token_stream.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\simple_calculator_v14.dir\build.make CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.s
+.PHONY : token_stream.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -237,15 +333,27 @@ help:
 	@echo ... simple_calculator_v14
 	@echo ... testing_generic_value
 	@echo ... testing_mat_lib
-	@echo ... simple_calculator_v14.obj
-	@echo ... simple_calculator_v14.i
-	@echo ... simple_calculator_v14.s
+	@echo ... calculate.obj
+	@echo ... calculate.i
+	@echo ... calculate.s
+	@echo ... environment.obj
+	@echo ... environment.i
+	@echo ... environment.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
+	@echo ... parser.obj
+	@echo ... parser.i
+	@echo ... parser.s
 	@echo ... testing_generic_value.obj
 	@echo ... testing_generic_value.i
 	@echo ... testing_generic_value.s
 	@echo ... testing_mat_lib.obj
 	@echo ... testing_mat_lib.i
 	@echo ... testing_mat_lib.s
+	@echo ... token_stream.obj
+	@echo ... token_stream.i
+	@echo ... token_stream.s
 .PHONY : help
 
 

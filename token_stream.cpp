@@ -2,73 +2,44 @@
 #include <iostream>
 #include <cctype>
 #include <sstream>
+#include <cmath>        // Para funciones matemáticas como sin, cos, log
+#include <stdexcept>    // Para runtime_error
 
 using namespace std;
 
-struct Token 
-{
-  enum id
-  {
-    none,
-    quit,
-    print,
-    number,
-    name_token,
-    const_token,
-    char_token,
-    help_token,
-    function_token,
-    precision_token,
-    set, 
-    show,
-    save,
-    load,
-    env,
-    filename
-  };
+// Implementaciones de los Constructores de Token (ahora referenciados correctamente)
 
-  id kind;
-  char symbol;
-  gv value;
-  string name;
-  double (*function)(double);
+Token::Token() 
+: kind(id::none), symbol(0), value(double(0)), name(), function(nullptr)
+{}
 
-  Token() 
-  : kind(id::none), symbol(0), value(double(0)), name(), function(nullptr)
-  {}
+Token::Token(id tk) 
+: kind(tk), symbol(0), value(double(0)), name(), function(nullptr)
+{}
 
-  Token(id tk) 
-  : kind(tk), symbol(0), value(double(0)), name(), function(nullptr)
-  {}
+// Implementación del constructor para tokens con ID y nombre (el que faltaba)
+Token::Token(id tk, const string& str)
+: kind(tk), symbol(0), value(double(0)), name(str), function(nullptr)
+{}
 
-  Token(id tk, const string& str)
-  : kind(tk), symbol(0), value(double(0)), name(str), function(nullptr)
-  {}
+Token::Token(char ch) 
+: kind(id::char_token), symbol(ch), value(double(0)), name(), function(nullptr)
+{}
+
+Token::Token(const gv& val)
+: kind(id::number), symbol(0), value(val), name(), function(nullptr)
+{}
+
+Token::Token(const string& str) 
+: kind(id::name_token), symbol(0), value(double(0)), name(str), function(nullptr) 
+{}
+
+Token::Token(const string& str, double (*the_function)(double)) 
+: kind(id::function_token), symbol(0), value(double(0)), name(str), function(the_function) 
+{}
 
 
-  Token(char ch) 
-  : kind(id::char_token), symbol(ch), value(double(0)), name(), function(nullptr)
-  {}
-
-  Token(const gv& val)
-  : kind(id::number), symbol(0), value(val), name(), function(nullptr)
-  {}
-
-  Token(const string& str) 
-  : kind(id::name_token), symbol(0), value(double(0)), name(str), function(nullptr) 
-  {}
-
-  Token(const string& str, double (*the_function)(double)) 
-  : kind(id::function_token), symbol(0), value(double(0)), name(str), function(the_function) 
-  {}
-
-  bool is_symbol(char c) { return ((kind==id::char_token) && (symbol==c)); }
-  bool is_number(const gv& v) { return ((kind==id::number) && (value==v)); }
-  bool is_name(const string& str) { return ((kind==id::name_token) && (name==str)); }
-  bool is_function() { return (kind==id::function_token); }
-};
-
-
+// Implementación de la función auxiliar (se mantiene)
 bool is_valid_filename(const string& s)
 {
     if (s.empty()) return false;
@@ -90,9 +61,10 @@ bool is_valid_filename(const string& s)
     return true;
 }
 
+// Implementación del constructor por defecto de Token_stream
+Token_stream::Token_stream() { } 
 
-
-// ---------------- MÉTODO GET() ----------------
+// ---------------- Implementación de get() ----------------
 
 Token Token_stream::get()
 {
@@ -104,7 +76,12 @@ Token Token_stream::get()
 
     char ch;
 
-    do { cin.get(ch); } while (isspace(ch));
+    do { 
+        if (!cin.get(ch)) {
+            // Manejar EOF o error de lectura
+            throw runtime_error("End of file or input stream error");
+        }
+    } while (isspace(ch));
 
     switch (ch)
     {
@@ -125,7 +102,7 @@ Token Token_stream::get()
         {
             cin.unget();
             double val;
-            cin >> val;
+            if (!(cin >> val)) throw runtime_error("Error reading number");
             return Token(gv(val));
         }
 
@@ -150,33 +127,33 @@ Token Token_stream::get()
                 if (s == "load") return Token(Token::id::load);
                 if (s == "env") return Token(Token::id::env);
 
-                // funciones
-                if (s == "sin") return Token(s, sin);
-                if (s == "cos") return Token(s, cos);
-                if (s == "tan") return Token(s, tan);
-                if (s == "asin") return Token(s, asin);
-                if (s == "acos") return Token(s, acos);
-                if (s == "atan") return Token(s, atan);
-                if (s == "exp") return Token(s, exp);
+                // funciones (se usa :: para evitar ambigüedad con std::)
+                if (s == "sin") return Token(s, ::sin);
+                if (s == "cos") return Token(s, ::cos);
+                if (s == "tan") return Token(s, ::tan);
+                if (s == "asin") return Token(s, ::asin);
+                if (s == "acos") return Token(s, ::acos);
+                if (s == "atan") return Token(s, ::atan);
+                if (s == "exp") return Token(s, ::exp);
 
                 if (s == "pow") return Token(s, nullptr);
-                if (s == "ln") return Token(s, log);
-                if (s == "log10") return Token(s, log10);
-                if (s == "log2") return Token(s, log2);
+                if (s == "ln") return Token(s, ::log);
+                if (s == "log10") return Token(s, ::log10);
+                if (s == "log2") return Token(s, ::log2);
 
+                // A esta línea apuntaba el segundo error de compilación
                 if (is_valid_filename(s))
                     return Token(Token::id::filename, s);
 
                 return Token(s);
             }
 
-            throw runtime_error("Bad token");
+            throw runtime_error("Bad token: " + string(1, ch));
     }
 }
 
 
-
-// ---------------- MÉTODO IGNORE() ----------------
+// ---------------- Implementación de ignore() ----------------
 
 void Token_stream::ignore()
 {
@@ -189,4 +166,10 @@ void Token_stream::ignore()
     char ch;
     while (cin >> ch)
         if (ch == ';') return;
+}
+
+// Implementación de la función unget
+void Token_stream::unget(Token t)
+{ 
+    buffer.push(t); 
 }
