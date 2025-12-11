@@ -5,27 +5,28 @@
 #include <string>
 #include "generic_value.hpp"
 #include "token_stream.hpp" 
-// Se ha eliminado: #include "token_stream.cpp"
 
 using gv = generic_value<double>;
 
-// 1. DEFINICIÓN DEL STRUCT VALUE (AÑADIDO)
-struct Value 
-{
-  std::string name;
-  gv value;
-  bool is_const;
+// *** NUEVA ESTRUCTURA AÑADIDA/MODIFICADA ***
+struct VariableEntry {
+    std::string name;
+    gv value;       // El valor real (generic_value)
+    bool is_const;  // Si es una constante
 
-  Value();
-  Value(const std::string& n, const gv& v, bool constant = false); 
+    // Constructores que usaste en tu archivo .cpp
+    VariableEntry() : name{}, value{0.0}, is_const{false} {} 
+    VariableEntry(const std::string& n, const gv& v, bool constant)
+        : name{n}, value{v}, is_const{constant} {}
 };
+// *******************************************
 
 
-// 2. DECLARACIÓN EXTERNA DE LA TABLA DE NOMBRES (CORREGIDA)
-// Ahora usa el tipo correcto 'Value'
-extern std::map<std::string, Value> names; 
+// *** MAPA MODIFICADO PARA USAR LA NUEVA ESTRUCTURA ***
+extern std::map<std::string, VariableEntry> names; 
+// ****************************************************
 
-// Declaraciones de funciones
+// Las firmas de función permanecen igual:
 gv get_value(const std::string& s);
 void set_value(const std::string& s, gv v);
 void define_name(const std::string& s, const gv& v, bool constant=false);

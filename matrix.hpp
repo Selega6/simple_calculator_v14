@@ -149,6 +149,7 @@
   
         matrix& operator/=(element_t scalar);
         matrix& operator%=(element_t scalar);
+        matrix inverse() const;
   
         matrix make_transpose() const
         {
@@ -351,6 +352,71 @@
           elements__[offset__(i,j)]=fmod(elements__[offset__(i,j)],scalar);
   
       return *this;
+    }
+
+    template<typename T>
+    matrix<T> matrix<T>::inverse() const
+    {
+        if(rows__ != columns__)
+        {
+            throw std::logic_error("matrix inverse: matrix must be square");
+        }
+
+        size_t n = rows__;
+
+        // Crear matrices aumentadas: [A | I]
+        matrix<T> A(*this);
+        matrix<T> I(n, n);
+
+        for(size_t i=0; i<n; ++i)
+            for(size_t j=0; j<n; ++j)
+                I[i][j] = (i == j ? 1 : 0);
+
+        // Gauss-Jordan
+        for(size_t i=0; i<n; ++i)
+        {
+            // 1. Pivot: si es 0, buscar fila para intercambiar
+            if(A[i][i] == T(0))
+            {
+                bool swapped = false;
+                for(size_t r=i+1; r<n; ++r)
+                {
+                    if(A[r][i] != T(0))
+                    {
+                        for(size_t c=0; c<n; ++c)
+                        {
+                            std::swap(A[i][c], A[r][c]);
+                            std::swap(I[i][c], I[r][c]);
+                        }
+                        swapped = true;
+                        break;
+                    }
+                }
+                if(!swapped) throw std::logic_error("matrix inverse: singular matrix");
+            }
+
+            // 2. Normalizar la fila del pivote para que A[i][i] = 1
+            T pivot = A[i][i];
+            for(size_t c=0; c<n; ++c)
+            {
+                A[i][c] /= pivot;
+                I[i][c] /= pivot;
+            }
+
+            // 3. Hacer ceros en la columna del pivote
+            for(size_t r=0; r<n; ++r)
+            {
+                if(r == i) continue;
+                T factor = A[r][i];
+                for(size_t c=0; c<n; ++c)
+                {
+                    A[r][c] -= factor * A[i][c];
+                    I[r][c] -= factor * I[i][c];
+                }
+            }
+        }
+
+        return I;
     }
   
     template<typename T>

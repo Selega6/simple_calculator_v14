@@ -1,28 +1,23 @@
 #include "environment.hpp"
 #include "token_stream.hpp"
+#include "generic_function.hpp"
+#include "generic_value.hpp"
 #include <iostream>
 #include <fstream>
+#include <limits>
 #include <sstream>
 #include <cctype>
 
+bool DEBUG_MODE_ENV = true;
 using namespace std;
+map<string, VariableEntry> names;
+using gv=generic_value<double>;
 
-map<string, Value> names;
+// gv::Value() 
+//     : name{}, value{0.0}, is_const{false} {}
 
-// ----------------------------
-//   STRUCT VALUE
-// ----------------------------
-
-Value::Value() 
-    : name{}, value{0.0}, is_const{false} {}
-
-Value::Value(const string& n, const gv& v, bool constant)
-    : name{n}, value{v}, is_const{constant} {}
-
-
-// ----------------------------
-//   GET / SET
-// ----------------------------
+// gv::Value(const string& n, const gv& v, bool constant)
+//     : name{n}, value{v}, is_const{constant} {}
 
 gv get_value(const string& s)
 {
@@ -58,13 +53,10 @@ bool is_constant(const string& s)
 
 void define_name(const string& s, const gv& v, bool constant)
 {
-    names[s] = Value(s, v, constant);
+    names[s] = VariableEntry(s, v, constant);
 }
 
 
-// ----------------------------
-//   SHOW ENVIRONMENT
-// ----------------------------
 
 void show_environment()
 {
@@ -77,17 +69,19 @@ void show_environment()
              << (p.second.is_const ? " (const)" : "")
              << "\n";
     }
+    for (const auto& f : generic_functions)
+    {
+        cout << "Function: " << f.second.name << "(";
+        for (size_t i = 0; i < f.second.params.size(); ++i)
+        {
+            cout << f.second.params[i];
+            if (i < f.second.params.size() - 1)
+                cout << ", ";
+        }
+        cout << ") = " << f.second.body_expression << "\n";
+    }
 }
 
-
-// ----------------------------
-//   SAVE ENVIRONMENT
-// ----------------------------
-// Formato:
-//   <nombre> <S|M> <is_const> <valor>
-//   S = escalar
-//   M = matriz literal completa
-// ----------------------------
 
 void save_env(Token tf)
 {
@@ -107,31 +101,31 @@ void save_env(Token tf)
         const gv& gval = it.second.value;
         bool is_const = it.second.is_const;
 
-        // Convert actual value to string
         ostringstream oss;
         gval.to_stream(oss);
         string text = oss.str();
 
-        // Si comienza con '{', es matriz
         if (!text.empty() && text[0] == '{')
-        {
             out << name << " M " << is_const << " " << text << "\n";
-        }
         else
-        {
             out << name << " S " << is_const << " " << text << "\n";
-        }
+    }
+
+    for (const auto& it : generic_functions)
+    {
+        const GenericFunction& f = it.second;
+
+        out << f.name << " F " << 0 << " " << f.params.size();
+
+        for (const auto& p : f.params)
+            out << " " << p;
+
+        out << " \"" << f.body_expression << "\"\n";
     }
 
     cout << "Environment saved to " << file_name << "\n";
 }
 
-
-// ----------------------------
-//   LOAD ENVIRONMENT
-// ----------------------------
-// Lee exactamente el formato generado por save_env.
-// ----------------------------
 
 void load_env(const std::string& file_name)
 {
@@ -143,6 +137,7 @@ void load_env(const std::string& file_name)
     }
 
     names.clear();
+    generic_functions.clear();
 
     string name;
     char type;
@@ -150,44 +145,78 @@ void load_env(const std::string& file_name)
 
     while (in >> name >> type >> is_const)
     {
+        if (DEBUG_MODE_ENV)
+        {
+            cout << "Loading entry: " << name << " Type: " << type << "\n";
+        }
         if (type == 'S')
         {
             double x;
             in >> x;
-            names[name] = Value(name, gv(x), is_const);
+            names[name] = VariableEntry(name, gv(x), is_const);
         }
         else if (type == 'M')
         {
             string matrix_text;
             getline(in, matrix_text);
 
-            // limpiar espacios iniciales
             while (!matrix_text.empty() && isspace(matrix_text[0]))
                 matrix_text.erase(0, 1);
 
-            // Añadir un ";" para que el parser pueda leerlo como literal
             matrix_text += ";";
 
-            // Crear stream temporal
             istringstream iss(matrix_text);
 
-            // Backup del estado actual de cin
             std::streambuf* old_buf = cin.rdbuf(iss.rdbuf());
 
-            // Backup del token_stream global
             extern Token_stream ts;
             Token_stream old_ts = ts;
-            ts = Token_stream();  // reiniciar temporalmente
+            ts = Token_stream();
 
-            // Usar el parser real para reconstruir la matriz
             extern gv statement();
             gv m = statement();
 
-            // Restaurar estado
             ts = old_ts;
             cin.rdbuf(old_buf);
 
-            names[name] = Value(name, m, is_const);
+            names[name] = VariableEntry(name, m, is_const);
+        }
+        else if (type == 'F')
+        {
+            size_t param_count;
+            in >> param_count;
+
+            vector<string> params(param_count);
+            for (size_t i = 0; i < param_count; ++i)
+                in >> params[i];
+
+            string line;
+            getline(in, line);
+
+            while (!line.empty() && isspace(line[0]))
+                line.erase(0, 1);
+
+            if (line.size() >= 2 && line.front() == '"' && line.back() == '"')
+                line = line.substr(1, line.size() - 2);
+
+            generic_functions[name] = GenericFunction(name, params, line);
+
+            if (DEBUG_MODE_ENV)
+            {
+                cerr << "Loaded function " << name << "(";
+                for (size_t i = 0; i < params.size(); ++i)
+                {
+                    cerr << params[i];
+                    if (i + 1 < params.size()) cerr << ", ";
+                }
+                cerr << ") = " << line << endl;
+            }
+}
+
+
+        else
+        {
+            cerr << "Error: unknown entry type '" << type << "' in environment file.\n";
         }
     }
 

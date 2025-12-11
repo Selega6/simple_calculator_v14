@@ -2,7 +2,7 @@
 #include "parser.hpp"
 #include "token_stream.hpp"
 #include "environment.hpp"
-#include "generic_function.hpp" // Asegúrate de que este include está aquí.
+#include "generic_function.hpp"
 
 #include <iostream>
 #include <iomanip>
@@ -10,29 +10,19 @@
 
 using namespace std;
 
-// DECLARACIÓN DE VARIABLES GLOBALES EXTERNAS (las que estaban en main.cpp)
 extern Token_stream ts;
 extern int precision;
 
-// AÑADIR LA DEFINICIÓN DE LOS MAPAS GLOBALES DE FUNCIONES GENÉRICAS
-// Si generic_function.hpp usa la estructura GenericFunction, 
-// debemos definir los mapas aquí.
 std::map<std::string, GenericFunction> generic_functions;
 std::map<std::string, std::string> generic_function_signatures;
 
 
-// ---------------------------------------------------------
-//  CLEAN-UP AFTER ERRORS
-// ---------------------------------------------------------
 void clean_up_mess()
 {
     ts.ignore();
 }
 
 
-// ---------------------------------------------------------
-//  HELP
-// ---------------------------------------------------------
 void help()
 {
     cout
@@ -69,18 +59,11 @@ void help()
 }
 
 
-// ---------------------------------------------------------
-//  PRECISION STATEMENT
-// ---------------------------------------------------------
 void precision_statement()
 {
     cout << " precision digits: " << precision << "\n";
 }
 
-
-// ---------------------------------------------------------
-//  SET PRECISION
-// ---------------------------------------------------------
 void set_precision()
 {
     Token t = ts.get();
@@ -94,9 +77,6 @@ void set_precision()
 }
 
 
-// ---------------------------------------------------------
-//  MAIN LOOP calculate()
-// ---------------------------------------------------------
 void calculate()
 {
     while (true)
@@ -109,32 +89,27 @@ void calculate()
             while (t.kind == Token::id::print)
                 t = ts.get();
 
-            // Exit command
             if (t.kind == Token::id::quit) 
                 return;
 
-            // Help
             if (t.kind == Token::id::help_token)
             {
                 help();
                 continue;
             }
 
-            // Precision
             if (t.kind == Token::id::precision_token)
             {
                 precision_statement();
                 continue;
             }
 
-            // set precision
             if (t.kind == Token::id::set)
             {
                 set_precision();
                 continue;
             }
 
-            // show env
             if (t.kind == Token::id::show)
             {
                 Token tt = ts.get();
@@ -148,7 +123,6 @@ void calculate()
                 continue;
             }
 
-            // save env
             if (t.kind == Token::id::save)
             {
                 Token tt = ts.get();
@@ -171,7 +145,6 @@ void calculate()
                 continue;
             }
 
-            // load env
             if (t.kind == Token::id::load)
             {
                 Token tt = ts.get();
@@ -194,7 +167,6 @@ void calculate()
                 continue;
             }
 
-            // Normal expression or assign
             ts.unget(t);
             gv r = statement();
 

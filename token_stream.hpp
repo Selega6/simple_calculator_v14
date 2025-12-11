@@ -1,7 +1,7 @@
 #ifndef TOKEN_STREAM_HPP
 #define TOKEN_STREAM_HPP
 
-#include <vector> // <-- CAMBIO CLAVE: Vector para LIFO
+#include <vector>
 #include <string>
 #include "generic_value.hpp"
 
@@ -40,7 +40,7 @@ public:
     void ignore();
 
 private:
-    std::vector<Token> buffer; // <-- Implementación LIFO
+    std::vector<Token> buffer;
 };
 
 bool is_valid_filename(const std::string& s);

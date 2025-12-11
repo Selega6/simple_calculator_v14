@@ -156,6 +156,7 @@ CMakeFiles/simple_calculator_v14.dir/calculate.cpp.obj: D:/ULPGC/master/PP_cplus
 
 CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj: D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/environment.cpp \
   D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/environment.hpp \
+  D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/generic_function.hpp \
   D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/generic_value.hpp \
   D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/matrix.hpp \
   D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/token_stream.hpp \
@@ -264,6 +265,7 @@ CMakeFiles/simple_calculator_v14.dir/environment.cpp.obj: D:/ULPGC/master/PP_cpl
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/basic_file.h \
@@ -614,7 +616,6 @@ CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: D:/ULPGC/master/PP_cp
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/deque.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/fstream.tcc \
@@ -641,20 +642,16 @@ CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: D:/ULPGC/master/PP_cp
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_deque.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_queue.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
@@ -669,7 +666,6 @@ CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: D:/ULPGC/master/PP_cp
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/deque \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
@@ -698,7 +694,6 @@ CMakeFiles/simple_calculator_v14.dir/token_stream.cpp.obj: D:/ULPGC/master/PP_cp
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/queue \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/sstream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
@@ -942,8 +937,6 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/deque.tcc:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h:
@@ -1020,18 +1013,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h:
 
 D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/environment.cpp:
 
-D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/main.cpp:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits:
 
+D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/main.cpp:
+
 D:/ULPGC/master/PP_cplusplus/simple_calculator_v14/token_stream.cpp:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_deque.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_queue.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/deque:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/queue:

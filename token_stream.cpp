@@ -2,12 +2,11 @@
 #include <iostream>
 #include <cctype>
 #include <sstream>
-#include <cmath>        // Para funciones matemáticas como sin, cos, log
-#include <stdexcept>    // Para runtime_error
+#include <cmath>
+#include <stdexcept>
 
 using namespace std;
 
-// Implementaciones de los Constructores de Token (ahora referenciados correctamente)
 
 Token::Token() 
 : kind(id::none), symbol(0), value(double(0)), name(), function(nullptr)
@@ -17,7 +16,6 @@ Token::Token(id tk)
 : kind(tk), symbol(0), value(double(0)), name(), function(nullptr)
 {}
 
-// Implementación del constructor para tokens con ID y nombre (el que faltaba)
 Token::Token(id tk, const string& str)
 : kind(tk), symbol(0), value(double(0)), name(str), function(nullptr)
 {}
@@ -39,7 +37,6 @@ Token::Token(const string& str, double (*the_function)(double))
 {}
 
 
-// Implementación de la función auxiliar (se mantiene)
 bool is_valid_filename(const string& s)
 {
     if (s.empty()) return false;
@@ -61,11 +58,7 @@ bool is_valid_filename(const string& s)
     return true;
 }
 
-// Implementación del constructor por defecto de Token_stream
 Token_stream::Token_stream() { } 
-
-
-// ---------------- Implementación de get() ----------------
 
 Token Token_stream::get()
 {
@@ -80,8 +73,6 @@ Token Token_stream::get()
 
     do { 
         if (!cin.get(ch)) {
-            // CORRECCIÓN CLAVE: Devolver Token::id::none en EOF en lugar de lanzar excepción.
-            // Esto permite que el parser recursivo finalice limpiamente.
             return Token(Token::id::none); 
         }
     } while (isspace(ch));
@@ -118,7 +109,6 @@ Token Token_stream::get()
                     s += ch;
                 cin.unget();
 
-                // palabras clave (se mantiene la lógica de keywords y funciones)
                 if (s == "quit") return Token(Token::id::quit);
                 if (s == "const") return Token(Token::id::const_token);
                 if (s == "help") return Token(Token::id::help_token);
@@ -130,7 +120,6 @@ Token Token_stream::get()
                 if (s == "load") return Token(Token::id::load);
                 if (s == "env") return Token(Token::id::env);
 
-                // funciones
                 if (s == "sin") return Token(s, ::sin);
                 if (s == "cos") return Token(s, ::cos);
                 if (s == "tan") return Token(s, ::tan);
@@ -155,13 +144,12 @@ Token Token_stream::get()
 }
 
 
-// ---------------- Implementación de ignore() ----------------
 
 void Token_stream::ignore()
 {
     while (!buffer.empty()) {
-        Token t = buffer.back(); // LIFO
-        buffer.pop_back();       // LIFO
+        Token t = buffer.back(); 
+        buffer.pop_back();      
         if (t.kind == Token::id::quit) return;
     }
 
@@ -170,9 +158,7 @@ void Token_stream::ignore()
         if (ch == ';') return;
 }
 
-// Implementación de la función unget
 void Token_stream::unget(Token t)
 { 
-    // LIFO: Añadir al final del vector
     buffer.push_back(t); 
 }
