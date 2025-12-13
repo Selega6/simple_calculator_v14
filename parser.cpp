@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include "token_stream.hpp"
 #include "environment.hpp"
+//#include "environment.cpp"
 #include "generic_function.hpp"
 
 #include <stdexcept>
@@ -24,6 +25,21 @@ gv term();
 gv primary();
 gv function_name();
 
+static std::string cleanup_matrix_output(const std::string& text)
+{
+    std::string cleaned_text;
+    cleaned_text.reserve(text.size());
+
+    for (char c : text)
+    {
+        if (!std::isspace(static_cast<unsigned char>(c)))
+        {
+            cleaned_text += c;
+        }
+    }
+    return cleaned_text;
+}
+
 static std::string replace_parameters(
     const GenericFunction& f,
     const std::vector<gv>& args)
@@ -44,7 +60,15 @@ static std::string replace_parameters(
     {
         std::ostringstream ss;
         args[i].to_stream(ss);
+
         std::string arg_value_str = ss.str();
+
+        // 🔴 CLAVE: limpiar matrices multilínea
+        if (!arg_value_str.empty() && arg_value_str[0] == '\n')
+        {
+            arg_value_str = cleanup_matrix_output(arg_value_str);
+        }
+        //arg_value_str = "(" + arg_value_str + ")";
 
         if (DEBUG_MODE)
             std::cerr << "DEBUG replace_parameters: Replace '" << f.params[i]
@@ -72,6 +96,7 @@ gv call_generic_function(
         std::cerr << "DEBUG call_generic_function: START '" << f.name << "'\n";
 
     std::string processed = replace_parameters(f, args);
+
     std::istringstream iss(processed);
     iss.imbue(std::locale::classic());
 
@@ -123,40 +148,36 @@ gv function_name()
     if (!tt.is_symbol('('))
         throw runtime_error("'(' expected");
 
-    gv v = expression();
-    tt = ts.get();
+    gv v = primary();   // ✅ CAMBIO CLAVE
 
+    tt = ts.get();
     if (tt.is_symbol(')'))
     {
-        if(t.name == "inv")
+        if (t.name == "inv")
         {
-            gv arg = v;
-            auto M = arg.get<gv::matrix_t>();
-            auto MI = M.inverse();            
-            return gv(MI);                    
+            auto M = v.get<gv::matrix_t>();
+            return gv(M.inverse());
         }
 
         if (t.function)
             return v.call_function(t.function);
-        else
-            throw runtime_error(t.name + " needs two arguments");
+
+        throw runtime_error(t.name + " needs one argument");
     }
 
     if (!tt.is_symbol(','))
-        throw runtime_error("')' expected or ',' for two arguments");
+        throw runtime_error("')' expected or ','");
 
     gv vv = expression();
     tt = ts.get();
 
-    if (tt.is_symbol(')'))
-    {
-        if (t.name == "pow")
-            return v.call_function(pow, vv);
-        else
-            throw runtime_error(t.name + " needs only one argument");
-    }
+    if (!tt.is_symbol(')'))
+        throw runtime_error("')' expected");
 
-    throw runtime_error("')' expected");
+    if (t.name == "pow")
+        return v.call_function(pow, vv);
+
+    throw runtime_error(t.name + " needs two arguments");
 }
 
 vector<typename gv::matrix_t::value_t::element_t> list()
@@ -470,7 +491,6 @@ gv primary()
 static std::string read_function_body()
 {
     std::ostringstream body;
-    std::string body_str;
 
     if (DEBUG_MODE)
         std::cerr << "DEBUG read_function_body: start\n";
@@ -495,7 +515,10 @@ static std::string read_function_body()
             tk.value.to_stream(ss);
             body << ss.str();
         }
-        else if (tk.kind == Token::id::name_token)
+        else if (
+            tk.kind == Token::id::name_token ||
+            tk.kind == Token::id::function_token 
+        )
         {
             body << tk.name;
         }
@@ -511,13 +534,12 @@ static std::string read_function_body()
         }
     }
 
-    body_str = body.str();
-
     if (DEBUG_MODE)
-        std::cerr << "DEBUG read_function_body: final body '" << body_str << "'\n";
+        std::cerr << "DEBUG read_function_body: final body '" << body.str() << "'\n";
 
-    return body_str;
+    return body.str();
 }
+
 
 gv statement()
 {

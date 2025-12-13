@@ -8,7 +8,7 @@
 #include <sstream>
 #include <cctype>
 
-bool DEBUG_MODE_ENV = true;
+bool DEBUG_MODE_ENV = false;
 using namespace std;
 map<string, VariableEntry> names;
 using gv=generic_value<double>;
