@@ -133,6 +133,9 @@ Token Token_stream::get()
                 if (s == "log10") return Token(s, ::log10);
                 if (s == "log2") return Token(s, ::log2);
 
+
+                if(s=="inv") return Token("inv", nullptr);
+
                 if (is_valid_filename(s))
                     return Token(Token::id::filename, s);
 

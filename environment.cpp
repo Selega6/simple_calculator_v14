@@ -19,6 +19,22 @@ using gv=generic_value<double>;
 // gv::Value(const string& n, const gv& v, bool constant)
 //     : name{n}, value{v}, is_const{constant} {}
 
+static std::string cleanup_matrix_output(const std::string& text)
+{
+    std::string cleaned_text;
+    cleaned_text.reserve(text.size());
+
+    for (char c : text)
+    {
+        // Se elimina cualquier carácter de espacio en blanco (espacios, saltos de línea, etc.)
+        if (!std::isspace(static_cast<unsigned char>(c)))
+        {
+            cleaned_text += c;
+        }
+    }
+    return cleaned_text;
+}
+
 gv get_value(const string& s)
 {
     auto it = names.find(s);
@@ -96,20 +112,32 @@ void save_env(Token tf)
     }
 
     for (const auto& it : names)
+{
+    const std::string& name = it.first;
+    gv gval = it.second.value;
+    bool is_const = it.second.is_const;
+
+    try
     {
-        const string& name = it.first;
-        const gv& gval = it.second.value;
-        bool is_const = it.second.is_const;
+        gval.get<gv::matrix_t>();
 
-        ostringstream oss;
+        std::ostringstream oss;
         gval.to_stream(oss);
-        string text = oss.str();
 
-        if (!text.empty() && text[0] == '{')
-            out << name << " M " << is_const << " " << text << "\n";
-        else
-            out << name << " S " << is_const << " " << text << "\n";
+        std::string text = cleanup_matrix_output(oss.str());
+        out << name << " M " << is_const << " " << text << "\n";
     }
+    catch (const std::logic_error&)
+    {
+        std::ostringstream oss;
+        gval.to_stream(oss);
+
+        out << name << " S " << is_const << " " << oss.str() << "\n";
+    }
+}
+
+
+
 
     for (const auto& it : generic_functions)
     {
