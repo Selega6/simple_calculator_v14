@@ -1,4 +1,3 @@
-//crear una clase que trate con funciones generales#
 #ifndef GENERIC_FUNCTION_HPP
     #define GENERIC_FUNCTION_HPP
 

@@ -375,7 +375,7 @@
         // Gauss-Jordan
         for(size_t i=0; i<n; ++i)
         {
-            // 1. Pivot: si es 0, buscar fila para intercambiar
+            //Pivotar
             if(A[i][i] == T(0))
             {
                 bool swapped = false;
@@ -395,7 +395,7 @@
                 if(!swapped) throw std::logic_error("matrix inverse: singular matrix");
             }
 
-            // 2. Normalizar la fila del pivote para que A[i][i] = 1
+            //Normalizar la fila del pivote para que A[i][i] = 1
             T pivot = A[i][i];
             for(size_t c=0; c<n; ++c)
             {
@@ -403,7 +403,7 @@
                 I[i][c] /= pivot;
             }
 
-            // 3. Hacer ceros en la columna del pivote
+            //Hacer ceros en la columna del pivote
             for(size_t r=0; r<n; ++r)
             {
                 if(r == i) continue;

@@ -1,7 +1,6 @@
 #include "parser.hpp"
 #include "token_stream.hpp"
 #include "environment.hpp"
-//#include "environment.cpp"
 #include "generic_function.hpp"
 
 #include <stdexcept>
@@ -63,12 +62,11 @@ static std::string replace_parameters(
 
         std::string arg_value_str = ss.str();
 
-        // 🔴 CLAVE: limpiar matrices multilínea
         if (!arg_value_str.empty() && arg_value_str[0] == '\n')
         {
-            arg_value_str = cleanup_matrix_output(arg_value_str);
+            arg_value_str.erase(0, 1); 
         }
-        //arg_value_str = "(" + arg_value_str + ")";
+
 
         if (DEBUG_MODE)
             std::cerr << "DEBUG replace_parameters: Replace '" << f.params[i]
@@ -148,7 +146,7 @@ gv function_name()
     if (!tt.is_symbol('('))
         throw runtime_error("'(' expected");
 
-    gv v = primary();   // ✅ CAMBIO CLAVE
+    gv v = primary();
 
     tt = ts.get();
     if (tt.is_symbol(')'))
@@ -196,29 +194,19 @@ vector<typename gv::matrix_t::value_t::element_t> list()
     return row;
 }
 
-// ... otras funciones ...
-
-// En parser.cpp
-
-// ... (otras funciones)
-
 gv columns()
 {
     vector<vector<typename gv::matrix_t::value_t::element_t>> rows_data;
 
-    // 1. Consumir '{'
     Token t = ts.get();
     if (!t.is_symbol('{'))
         throw runtime_error("'{' expected to start matrix/vector literal");
 
-    // 2. Pre-leer el siguiente token para distinguir entre vector fila (ej. 1) y matriz 2D (ej. {)
     Token next = ts.get();
-    ts.unget(next); // Pone el token de vuelta, solo para "peek".
+    ts.unget(next);
     
     if (next.is_symbol('{'))
     {
-        // Caso 2: Matriz 2D: {{r1}, {r2}, ...}
-        
         Token t_row_start, t_row_end, t_sep;
         do {
             t_row_start = ts.get();
@@ -228,23 +216,22 @@ gv columns()
                 break; 
             }
             
-            // Comprobar si es fila vacía {}
             Token tt = ts.get();
             if (tt.is_symbol('}'))
             {
-                rows_data.push_back({}); // Fila vacía
+                rows_data.push_back({});
             }
             else
             {
                 ts.unget(tt);
-                rows_data.push_back(list()); // list() consume elementos y devuelve el '}' o ','
+                rows_data.push_back(list());
                 
                 t_row_end = ts.get();
                 if (!t_row_end.is_symbol('}'))
                     throw runtime_error("'}' expected for matrix row end");
             }
 
-            t_sep = ts.get(); // Obtener el separador ',' o el token final '}'
+            t_sep = ts.get();
         }
         while (t_sep.is_symbol(','));
 
@@ -256,17 +243,13 @@ gv columns()
     }
     else
     {
-        // Caso 1: Vector fila: {1,2,3,4} o Vector vacío: {}
 
-        // Comprobar vector vacío {}
         if (next.is_symbol('}'))
         {
-             ts.get(); // Consumir '}' (que ya está en el stream por el unget de "peek")
+             ts.get();
         }
         else
         {
-            // Vector fila simple. El token de inicio (ej. '1') ya está en el stream.
-
             vector<typename gv::matrix_t::value_t::element_t> row_elements = list();
 
             Token t_close = ts.get();
@@ -280,7 +263,6 @@ gv columns()
         }
     }
 
-    // Comprobar que todas las filas tengan el mismo número de columnas, si no son vacías
     if (rows_data.size() > 1)
     {
         size_t cols = 0;
@@ -300,17 +282,11 @@ gv columns()
             }
         }
     }
-    
-    // Si se parseó un vector fila simple, asegurarse de que solo se creó una fila.
-    // Esto es manejado por el constructor matrix(const vector<vector<T>>& rows)
+
 
     return gv(typename gv::matrix_t::value_t(rows_data));
 }
 
-// ... (resto del archivo)
-// ... gv term() ...
-
-// ... gv expression() ...
 gv term()
 {
     gv left = primary();
@@ -392,8 +368,6 @@ gv constant_assign()
     return v;
 }
 
-// En parser.cpp, reemplazar la función primary() con esta versión:
-
 gv primary()
 {
     Token t = ts.get();
@@ -401,10 +375,21 @@ gv primary()
     if (DEBUG_MODE)
         std::cerr << "DEBUG primary: token name=" << t.name << "\n";
 
+    if (t.is_symbol('+'))
+    {
+        return primary(); 
+    }
+    
+    if (t.is_symbol('-'))
+    {
+        return -primary();
+    }
+
     if (t.is_function())
     {
         if (DEBUG_MODE)
             std::cerr << "DEBUG primary: built-in function " << t.name << "\n";
+            std::cerr << "DEBUG primary: parsing built-in function\n";
 
         ts.unget(t);
         return function_name();
@@ -467,7 +452,7 @@ gv primary()
 
     if (t.is_symbol('{'))
     {
-        ts.unget(t); // Devolver la llave de apertura '{' para que columns() la consuma
+        ts.unget(t);
         return columns();
     }
     
@@ -641,18 +626,12 @@ gv statement()
         }
     }
     
-    // CORRECCIÓN: Si el token inicial 't' no era 'const' o 'name_token', 
-    // se asume que es el inicio de una expresión (como un literal matricial '{').
-    // Lo devolvemos al stream y llamamos a expression().
     if (t.kind != Token::id::name_token)
     {
         ts.unget(t);
         return expression();
     }
 
-    // Si llegamos aquí, 't' era un name_token que ha sido restaurado en el stream.
-    // Ahora comprobamos si es una asignación o una simple expresión variable.
-    
     Token tt = ts.get();
 
     if (tt.kind == Token::id::name_token)

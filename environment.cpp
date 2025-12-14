@@ -13,12 +13,6 @@ using namespace std;
 map<string, VariableEntry> names;
 using gv=generic_value<double>;
 
-// gv::Value() 
-//     : name{}, value{0.0}, is_const{false} {}
-
-// gv::Value(const string& n, const gv& v, bool constant)
-//     : name{n}, value{v}, is_const{constant} {}
-
 static std::string cleanup_matrix_output(const std::string& text)
 {
     std::string cleaned_text;
@@ -26,7 +20,6 @@ static std::string cleanup_matrix_output(const std::string& text)
 
     for (char c : text)
     {
-        // Se elimina cualquier carácter de espacio en blanco (espacios, saltos de línea, etc.)
         if (!std::isspace(static_cast<unsigned char>(c)))
         {
             cleaned_text += c;

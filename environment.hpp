@@ -8,25 +8,19 @@
 
 using gv = generic_value<double>;
 
-// *** NUEVA ESTRUCTURA AÑADIDA/MODIFICADA ***
 struct VariableEntry {
     std::string name;
-    gv value;       // El valor real (generic_value)
-    bool is_const;  // Si es una constante
+    gv value;
+    bool is_const; 
 
-    // Constructores que usaste en tu archivo .cpp
     VariableEntry() : name{}, value{0.0}, is_const{false} {} 
     VariableEntry(const std::string& n, const gv& v, bool constant)
         : name{n}, value{v}, is_const{constant} {}
 };
-// *******************************************
 
 
-// *** MAPA MODIFICADO PARA USAR LA NUEVA ESTRUCTURA ***
 extern std::map<std::string, VariableEntry> names; 
-// ****************************************************
 
-// Las firmas de función permanecen igual:
 gv get_value(const std::string& s);
 void set_value(const std::string& s, gv v);
 void define_name(const std::string& s, const gv& v, bool constant=false);
